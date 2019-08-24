@@ -77,7 +77,11 @@ tunnel.on('error', function(err){
 //#endregion
 
 app.get('/', (req, res) =>{
-    res.redirect('/api/v1/users');
+    res.redirect('/api/v1/users/');
+});
+app.get('/:id', (req, res) => {
+    const idOrName = req.params.id;
+    res.redirect('/api/v1/users/' + idOrName);
 });
 
 // get all users
