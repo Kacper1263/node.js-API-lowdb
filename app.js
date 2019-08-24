@@ -66,7 +66,7 @@ app.post('/api/v1/users', (req, res) => {
     return res.status(201).send({
         success: 'true',
         message: 'User added successfully',
-        user
+        content: user
     })
     
 });
@@ -87,7 +87,7 @@ app.get('/api/v1/users/:id', (req, res) => {
                 return res.status(200).send({
                     success: 'true',        
                     message: 'User retrieved successfully',        
-                    user,      
+                    content: user,      
                 });    
             } 
         }); 
@@ -98,7 +98,7 @@ app.get('/api/v1/users/:id', (req, res) => {
                     return res.status(200).send({
                         success: 'true',        
                         message: 'User retrieved successfully',        
-                        user,      
+                        content: user,      
                     }); 
                 } 
             }); 
@@ -178,7 +178,7 @@ app.put('/api/v1/users/:id', (req, res) => {
                 return res.status(201).send({
                     success: 'true',
                     message: 'User replaced successfully',
-                    newUser,
+                    content: newUser,
                 });
             }
             else{
