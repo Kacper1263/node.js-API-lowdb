@@ -15,6 +15,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.set('port', 5000);
+
 const localtunnel = require('localtunnel');
 //----------Tunnel config---------------------//
 tunnelSubdomain = 'kacper-api',               //
@@ -22,6 +23,7 @@ tunnelPort = 5000,                            //
 tunnelUrlUWant = 'https://kacper-api.localtunnel.me'; //Full url for verification is domain in use
 //--------------------------------------------//
 
+//#region localtunnel stuff
 var tunnel = localtunnel(tunnelPort, {subdomain: tunnelSubdomain}, function(err,tunnel){
     if(err){
       console.log("Error while creating tunnel: " + err);
@@ -45,7 +47,7 @@ tunnel.on('close', function(){
     process.exit();
 });
 var restartingTunnel = false;
-tunnel.on('error', function(err){               //To wywala kiedy jest checke firewall
+tunnel.on('error', function(err){ 
     if(restartingTunnel) return;
     restartingTunnel = true;
     console.log("Error on tunnel. Err: " + err);
@@ -72,7 +74,7 @@ tunnel.on('error', function(err){               //To wywala kiedy jest checke fi
       restartingTunnel = false;
     });
 });
-
+//#endregion
 
 // get all users
 app.get('/api/v1/users', (req, res) => {
