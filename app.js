@@ -14,6 +14,65 @@ db.defaults({ users: []}).write() //default variables for database
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.set('port', 5000);
+const localtunnel = require('localtunnel');
+//----------Tunnel config---------------------//
+tunnelSubdomain = 'kacper-api',               //
+tunnelPort = 5000,                            // 
+tunnelUrlUWant = 'https://kacper-api.localtunnel.me'; //Full url for verification is domain in use
+//--------------------------------------------//
+
+var tunnel = localtunnel(tunnelPort, {subdomain: tunnelSubdomain}, function(err,tunnel){
+    if(err){
+      console.log("Error while creating tunnel: " + err);
+      process.exit();
+    }
+  
+    console.log("Tunnel started with url: " + tunnel.url + " on port: " + tunnelPort);
+  
+    if(tunnel.url != tunnelUrlUWant){
+      console.log("Error! Subdomain in use!");
+      process.exit();
+    }
+    if(tunnelPort != app.get('port')){
+      console.log("Tunnel on different port! API:" + app.get('port') + " tunnel:" + tunnelPort);
+    }
+  
+    console.log("");
+});
+tunnel.on('close', function(){
+    console.log("Tunnel closed!");
+    process.exit();
+});
+var restartingTunnel = false;
+tunnel.on('error', function(err){               //To wywala kiedy jest checke firewall
+    if(restartingTunnel) return;
+    restartingTunnel = true;
+    console.log("Error on tunnel. Err: " + err);
+    console.log();
+    console.log("Restarting tunnel...");
+    
+    tunnel = localtunnel(tunnelPort, {subdomain: tunnelSubdomain}, function(err,tunnel){
+      if(err){
+        console.log("Error while creating tunnel: " + err);
+        process.exit();
+      }
+    
+      console.log("Tunnel started with url: " + tunnel.url + " on port: " + tunnelPort);
+      
+      if(tunnel.url != tunnelUrlUWant){
+        console.log("Error! Subdomain in use!");
+        process.exit();
+      }
+      if(tunnelPort != app.get('port')){
+        console.log("Tunnel on different port! API:" + app.get('port') + " tunnel:" + tunnelPort);
+      }
+      
+      console.log("");
+      restartingTunnel = false;
+    });
+});
+
 
 // get all users
 app.get('/api/v1/users', (req, res) => {
@@ -187,12 +246,8 @@ app.put('/api/v1/users/:id', (req, res) => {
                 message: 'User not found. Wrong ID',
             });
         }
-  });
+});
 
-
-
-const PORT = 5000;
-
-app.listen(PORT, () => {
-  console.log(`server running on port ${PORT}`)
+app.listen(app.get('port'), () => {
+  console.log('API running on port ' + app.get('port'))
 });
