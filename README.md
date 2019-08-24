@@ -10,6 +10,7 @@
  
  - Clone repo
  - Go to main folder (with app.js)
+ - Edit tunnel config in app.js
  - Run <b>npm install</b> from command line
  
  <br/>
