@@ -30,8 +30,11 @@
   <br/>
   In body provide:
    - name
-   - description
-
+   - description <br/>
+   <p align="center">
+    <img src="https://user-images.githubusercontent.com/43702481/63639411-f20d6600-c692-11e9-84df-d0bfdc44c3d1.png" />
+   </p>
+   
  ### Delete user
   Send DELETE request to <b>.../api/v1/users/:id</b>
  
