@@ -16,6 +16,9 @@ async function getUser(user){
             console.log(Date.now() - time + "ms")
         }
         else{
+            if(body.success == undefined){
+                return console.log(body)
+            }
             console.log("Success: " + body.success);
             console.log("Message: " + body.message);
             console.log(Date.now() - time + "ms")
@@ -39,6 +42,9 @@ async function getAll(){
             console.log(Date.now() - time + "ms")
         }
         else{
+            if(body.success == undefined){
+                return console.log(body)
+            }
             console.log("Success: " + body.success);
             console.log("Message: " + body.message);
             console.log(Date.now() - time + "ms")
@@ -72,6 +78,9 @@ async function addUser(name, description){
             console.log(Date.now() - time + "ms")
         }
         else{
+            if(body.success == undefined){
+                return console.log(body)
+            }
             console.log("Success: " + body.success);
             console.log("Message: " + body.message);
             console.log(Date.now() - time + "ms")
@@ -80,6 +89,48 @@ async function addUser(name, description){
         console.log(err);
     });
 };
+
+async function deleteUser(user){
+    var time = Date.now();
+    console.log("Sending...\n");
+    await request('https://kacper-api.localtunnel.me/api/v1/users/'+user, {
+        json: true, 
+        simple: false, 
+        timeout: 120000,
+        method: "DELETE"
+    }).then(body => {
+        var success = body.success;
+        if(success == "true"){
+            console.log("Success: " + body.success);
+            console.log("Message: " + body.message);
+            console.log(Date.now() - time + "ms")
+        }
+        else{
+            if(body.success == undefined){
+                return console.log(body)
+            }
+            console.log("Success: " + body.success);
+            console.log("Message: " + body.message);
+            console.log(Date.now() - time + "ms")
+        }        
+    }).catch(err =>{
+        console.log(err);
+    });
+};
+
+if (process.argv[2] == "getUser"){ //[0] is node, [1] is path, [2] is first argument 
+    getUser(process.argv[3])
+}
+else if(process.argv[2] == "getAll") {
+    getAll()
+}
+else if(process.argv[2] == "addUser") {
+    addUser(process.argv[3], process.argv[4])
+}
+else if(process.argv[2] == "deleteUser") {
+    deleteUser(process.argv[3])
+}
+else console.log("Use with argument: \ngetUser <ID>, \ngetAll, \naddUser <Name> <Description>, \ndeleteUser <ID>")
 //getUser(2);
 //getAll()
-addUser("Client", "Client script");
+//addUser("Client", "Client script");
