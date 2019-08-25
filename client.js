@@ -37,7 +37,7 @@ async function getAll(){
             console.log("Success: " + body.success);
             console.log("Message: " + body.message);
             var content = body.content.users;
-            console.log("\nContent: \n" + JSON.stringify(content, null, "\t"));
+            console.log("\nContent: \n" + JSON.stringify(content, null, 3));
             if(content.length > 0) console.log("Last user name: " + content[content.length - 1].name);
             console.log(Date.now() - time + "ms")
         }
