@@ -21,6 +21,11 @@ app.get('/:id', (req, res) => {
     res.redirect('/api/v1/users/' + idOrName);
 });
 
+//404
+app.use(function(req, res){
+  res.status(404).send({code: 404, description: "Page not found!", TIP: "If you are looking for API try /api/{versionOfAPI}/users"});
+});
+
 const PORT = 5000;
 
 app.listen(PORT, () => {
