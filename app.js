@@ -7,11 +7,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //Routes
-var routes = require('./routes/index')
-app.use('/api/v1/users', routes.getUser)
-app.use('/api/v1/users', routes.addUser)
-app.use('/api/v1/users', routes.deleteUser)
-app.use('/api/v1/users', routes.editUser)
+var routes_v1 = require('./routes/v1/index')
+app.use('/api/v1/users', routes_v1.getUser)
+app.use('/api/v1/users', routes_v1.addUser)
+app.use('/api/v1/users', routes_v1.deleteUser)
+app.use('/api/v1/users', routes_v1.editUser)
 
 app.get('/', (req, res) =>{
     res.redirect('/api/v1/users/');
