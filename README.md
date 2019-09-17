@@ -23,15 +23,15 @@ Try [second branch with localtunnel](https://github.com/Kacper1263/node.js-API-l
 ## API usage
 
  ### Get all users
-  Send GET request to <b>.../api/v1/users</b>
+  Send GET request to <b>.../api/v2/users</b>
  ### Get one user
-  - Send GET request to <b>.../api/v1/users/:id</b>
-  - Send GET request to <b>.../api/v1/users/:name (It will take the first user it finds!)</b>
+  - Send GET request to <b>.../api/v2/users/:id</b>
+  - Send GET request to <b>.../api/v2/users/:name (It will take the first user it finds!)</b>
   
-  e.g. <b>localhost:5000/api/v1/users/4</b> or <b>localhost:5000/api/v1/users/kacper</b>
+  e.g. <b>localhost:5000/api/v2/users/4</b> or <b>localhost:5000/api/v2/users/kacper</b>
   
  ### Add user
-  Send POST request to <b>.../api/v1/users/</b> <br/>
+  Send POST request to <b>.../api/v2/users/</b> <br/>
   <br/>
   In body provide:
    - name
@@ -41,10 +41,10 @@ Try [second branch with localtunnel](https://github.com/Kacper1263/node.js-API-l
    </p>
    
  ### Delete user
-  Send DELETE request to <b>.../api/v1/users/:id</b>
+  Send DELETE request to <b>.../api/v2/users/:id</b>
  
  ### Edit user data
-  Send PUT request to <b>.../api/v1/users/:id</b>
+  Send PUT request to <b>.../api/v2/users/:id</b>
   
   In body provide <b>name</b> or <b>description</b>. Information that will not be given will be loaded from the old content.
   <br/><br/><br/>
