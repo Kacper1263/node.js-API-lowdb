@@ -9,22 +9,20 @@ const usersAdapter = new FileSync('users.json')
 const usersDB = low(usersAdapter)
 //#endregion
 
+const functions = require('./functions/index')
+
 usersDB.defaults({ registeredUsers: {}}).write() //default variables for database
 
 router.get('/', (req, res) => {
     usersDB.read();
-    var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-    ip = ip.replace(/\./g, "-") // replace dots with "-"
-
-    if(usersDB.get("registeredUsers."+ip).value() == null){
+    var ip = functions.isIpRegistered(req).ip
+    if(!functions.isIpRegistered(req).registered){
         usersDB.set("registeredUsers."+ip, {}).write()
-        res.send("IP registered successfully.");
+        res.send("IP registered successfully.\nIP: " + ip);
     }
     else{
         res.send("This IP exist in DB");
     }
-    //TODO: Try to return ip for test
-    res.send(ip)
 });
 
 module.exports = router;

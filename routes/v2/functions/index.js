@@ -1,0 +1,1 @@
+module.exports.isIpRegistered = require('./register')
