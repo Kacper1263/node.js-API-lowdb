@@ -18,12 +18,19 @@ router.delete('/', (req, res) => {
     // TODO: If user is registered and send header in request
     if(functions.isIpRegistered(req).registered){
         if(db.get("users").remove().write()){
-            return res.status(200).send({
-                success: 'true',
-                message: 'All users deleted successfuly',
-            }); 
-        }
-        else{
+            if(db.defaults({ users: []}).write()){
+                return res.status(200).send({
+                    success: 'true',
+                    message: 'All users deleted successfuly',
+                }); 
+            } else{
+                return res.status(500).send({
+                    success: 'false',
+                    message: 'Error while deleting',
+                });
+            }
+
+        } else{
             return res.status(500).send({
                 success: 'false',
                 message: 'Error while deleting',
