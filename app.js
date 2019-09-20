@@ -42,7 +42,7 @@ app.get('/:id', (req, res) => {
 
 //404
 app.use(function(req, res){
-  res.status(404).send({success: 'false', code: 404, description: "Page not found!", TIP: "If you are looking for API try /api/{versionOfAPI}/users"});
+  res.status(404).send({success: 'false', code: 404, message: "Page not found!", TIP: "If you are looking for API try /api/{versionOfAPI}/users"});
 });
 
 const PORT = 5000;
