@@ -128,8 +128,7 @@ async function register() {
       json: true,
       simple: false,
       timeout: 120000
-    })
-      .then(body => {
+    }).then(body => {
         var success = body.success;
         if (success == "true") {
           console.log("Success: " + body.success);
@@ -147,10 +146,9 @@ async function register() {
           console.log("Message: " + body.message);
           console.log(Date.now() - time + "ms");
         }
-      })
-      .catch(err => {
+    }).catch(err => {
         console.log(err);
-      });
+    });
 }
 
 

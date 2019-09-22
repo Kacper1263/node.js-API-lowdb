@@ -15,7 +15,7 @@ db.defaults({ users: []}).write() //default variables for database
 router.delete('/', (req, res) => {
     db.read();
 
-    // TODO: If user is registered and send header in request
+    //You must be registered and "ConfirmDelete" header is required to delete all users from db
     if(functions.isIpRegistered(req).registered && req.header("ConfirmDelete") == "true"){
         if(db.get("users").remove().write()){
             if(db.defaults({ users: []}).write()){
@@ -56,8 +56,7 @@ router.delete('/', (req, res) => {
                 message: 'Something went wrong. It\'s probably not your fault',
             });
         }        
-    }
-    
+    }    
 });
 
 module.exports = router;
