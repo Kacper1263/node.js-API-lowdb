@@ -17,6 +17,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+
 //Routes API v1
 var routes_v1 = require('./routes/v1/index')
 app.use('/api/v1/users', routes_v1.getUser)
