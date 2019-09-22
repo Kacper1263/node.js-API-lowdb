@@ -23,6 +23,6 @@ jobs:
     - name: npm install and run
       run: |
         npm install
-        npm app.js
+        node app.js
       env:
         CI: true
