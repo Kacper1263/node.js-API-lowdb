@@ -16,7 +16,7 @@ router.delete('/', (req, res) => {
     db.read();
 
     // TODO: If user is registered and send header in request
-    if(functions.isIpRegistered(req).registered){
+    if(functions.isIpRegistered(req).registered && req.header("ConfirmDelete") == "true"){
         if(db.get("users").remove().write()){
             if(db.defaults({ users: []}).write()){
                 return res.status(200).send({
@@ -38,10 +38,24 @@ router.delete('/', (req, res) => {
         }
     }
     else{
-        return res.status(403).send({
-            success: 'false',
-            message: 'You must be registered! Use /api/v2/register',
-        });
+        if(!functions.isIpRegistered(req).registered){
+            return res.status(403).send({
+                success: 'false',
+                message: 'You must be registered! Use /api/v2/register',
+            });
+        }
+        else if(req.header("ConfirmDelete") != "true"){
+            return res.status(403).send({
+                success: 'false',
+                message: 'You must set header \'ConfirmDelete\' to \'true\'!',
+            });
+        }
+        else{
+            return res.status(500).send({
+                success: 'false',
+                message: 'Something went wrong. It\'s probably not your fault',
+            });
+        }        
     }
     
 });

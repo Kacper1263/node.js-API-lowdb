@@ -97,7 +97,10 @@ async function deleteUser(user){
         json: true, 
         simple: false, 
         timeout: 120000,
-        method: "DELETE"
+        method: "DELETE",
+        headers:{
+            "ConfirmDelete": "true"
+        }
     }).then(body => {
         var success = body.success;
         if(success == "true"){
