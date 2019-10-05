@@ -31,7 +31,7 @@ router.get('/:id', (req, res) => {
     var success = false;
     
     if(list != null && listLength != 0){
-        list.forEach(user => { //Search by ID
+        list.find(user => { //Search by ID
             if (user.id === id) {
                 success = true;
                 return res.status(200).send({
@@ -42,7 +42,7 @@ router.get('/:id', (req, res) => {
             } 
         }); 
         if(!success){
-            list.forEach(user => {                    //Search by name
+            list.find(user => {                    //Search by name
                 if (user.name === name && !success) { //If success stop checking
                     success = true;                    
                     return res.status(200).send({
