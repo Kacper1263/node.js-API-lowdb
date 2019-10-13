@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const versions = require("./versions")
 
 //#region db settings
 const low = require('lowdb')
@@ -43,7 +44,7 @@ app.get('/:id', (req, res) => {
 
 //404
 app.use(function(req, res){
-  res.status(404).send({success: 'false', code: 404, message: "Page not found!", TIP: "If you are looking for API try /api/{versionOfAPI}/users"});
+  res.status(404).send({success: 'false', code: 404, message: "Page not found!", TIP: `If you are looking for API try /api/${versions.latestVersion()}/users`});
 });
 
 const PORT = 5000;
