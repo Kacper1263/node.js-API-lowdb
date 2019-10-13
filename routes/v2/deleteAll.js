@@ -19,6 +19,7 @@ router.delete('/', (req, res) => {
     if(functions.isIpRegistered(req).registered && req.header("ConfirmDelete") == "true"){
         if(db.get("users").remove().write()){
             if(db.defaults({ users: []}).write()){
+                functions.addDeletionToUserStats(req)
                 return res.status(200).send({
                     success: 'true',
                     message: 'All users deleted successfuly',
