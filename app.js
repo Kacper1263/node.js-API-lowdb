@@ -35,11 +35,11 @@ app.use('/api/v2/users', routes_v2.deleteAll)
 app.use('/api/v2/register', routes_v2.register)
 
 app.get('/', (req, res) =>{
-    res.redirect('/api/v1/users/');
+    res.redirect(`/api/${versions.latestVersion()}/users/`);
 });
 app.get('/:id', (req, res) => {
     const idOrName = req.params.id;
-    res.redirect('/api/v1/users/' + idOrName);
+    res.redirect(`/api/${versions.latestVersion}/users/` + idOrName);
 });
 
 //404
