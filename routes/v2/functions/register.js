@@ -27,6 +27,10 @@ function isIpRegistered(req){
     }
 }
 
+/** 
+ * This will add time of last deleteAll to users stats
+ * @param {Request} req express request param
+ */
 function addDeletionToUserStats(req){
     usersDB.read()
     var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
@@ -49,7 +53,6 @@ function addDeletionToUserStats(req){
     var newDate = `${day}.${month}.${year} ${hour}:${minutes}:${seconds}`
 
     usersDB.set("registeredUsers."+ip, {lastDeletion: newDate}).write()
-    //usersDB.get("registeredUsers."+ip).push({lastDeletion: newDate}).write()
 }
 
 module.exports = {
