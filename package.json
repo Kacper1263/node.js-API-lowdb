@@ -4,13 +4,18 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "test": "node app.js"
   },
   "author": "Kacper Marcinkiewicz",
   "license": "MIT",
   "dependencies": {
+    "@types/lowdb": "^1.0.9",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "lowdb": "^1.0.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
     "localtunnel": "^1.9.2",
     "lowdb": "^1.0.0"
   }
