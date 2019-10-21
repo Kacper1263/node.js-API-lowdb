@@ -44,9 +44,15 @@ Try [second branch with localtunnel](https://github.com/Kacper1263/node.js-API-l
   Send DELETE request to <b>.../api/v2/users/:id</b>
  
  ### Edit user data
-  Send PUT request to <b>.../api/v2/users/:id</b>
+  Send PUT request to <b>.../api/v2/users/:id</b>  
+  In body provide <b>name</b> or <b>description</b>. Information that will not be given will be loaded from the old content
   
-  In body provide <b>name</b> or <b>description</b>. Information that will not be given will be loaded from the old content.
-  <br/><br/><br/>
+ ### Delete all users
+  Send DELETE request to <b>.../api/v2/users/</b><br />
+  Your IP must be registered do delete all users
+  
+ ### Register
+  Send GET requiest to <b>.../api/v2/register/</b>
+  This will register your public IP <br/><br/><br/>
 
 The project uses [lowdb](https://www.npmjs.com/package/lowdb) as a database.
