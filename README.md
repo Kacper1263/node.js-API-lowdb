@@ -52,7 +52,7 @@ Try [second branch with localtunnel](https://github.com/Kacper1263/node.js-API-l
   Your IP must be registered do delete all users
   
  ### Register
-  Send GET requiest to <b>.../api/v2/register/</b>
+  Send GET requiest to <b>.../api/v2/register/</b><br />
   This will register your public IP <br/><br/><br/>
 
 The project uses [lowdb](https://www.npmjs.com/package/lowdb) as a database.
