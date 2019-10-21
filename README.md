@@ -1,8 +1,4 @@
-# Node.js API supporting database (lowdb) with users + localtunnel
-<br/>
-
-## What is localtunnel
-[localtunnel page on npm](https://www.npmjs.com/package/localtunnel)
+# Node.js API supporting database (lowdb) with users
 
 <br/>
 
