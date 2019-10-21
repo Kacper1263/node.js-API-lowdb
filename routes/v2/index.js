@@ -1,0 +1,6 @@
+module.exports.getUser = require('./get')
+module.exports.addUser = require('./post')
+module.exports.deleteUser = require('./delete')
+module.exports.deleteAll = require('./deleteAll')
+module.exports.editUser = require('./put')
+module.exports.register = require("./register")

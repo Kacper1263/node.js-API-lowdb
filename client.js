@@ -5,7 +5,7 @@ const request = require('request-promise');
 async function getUser(user){
     var time = Date.now();
     console.log("Sending...\n");
-    await request('https://kacper-api.localtunnel.me/api/v1/users/'+user, {json: true, simple: false, timeout: 120000}).then(body => {
+    await request('https://kacper-api.localtunnel.me/api/v2/users/'+user, {json: true, simple: false, timeout: 120000}).then(body => {
         var success = body.success;
         if(success == "true"){
             console.log("Success: " + body.success);
@@ -16,7 +16,7 @@ async function getUser(user){
             console.log(Date.now() - time + "ms")
         }
         else{
-            if(body.success == undefined){
+            if(body.success === undefined || body.message === undefined){
                 return console.log(body)
             }
             console.log("Success: " + body.success);
@@ -31,7 +31,7 @@ async function getUser(user){
 async function getAll(){
     var time = Date.now()
     console.log("Sending...\n");
-    await request('https://kacper-api.localtunnel.me/api/v1/users/', {json: true, simple: false, timeout: 120000}).then(body => {
+    await request('https://kacper-api.localtunnel.me/api/v2/users/', {json: true, simple: false, timeout: 120000}).then(body => {
         var success = body.success;
         if(success == "true"){
             console.log("Success: " + body.success);
@@ -42,7 +42,7 @@ async function getAll(){
             console.log(Date.now() - time + "ms")
         }
         else{
-            if(body.success == undefined){
+            if(body.success === undefined || body.message === undefined){
                 return console.log(body)
             }
             console.log("Success: " + body.success);
@@ -57,7 +57,7 @@ async function getAll(){
 async function addUser(name, description){
     var time = Date.now();
     console.log("Sending...\n");
-    await request('https://kacper-api.localtunnel.me/api/v1/users/', {
+    await request('https://kacper-api.localtunnel.me/api/v2/users/', {
         json: true, // Output as JSON
         method: 'POST',
         timeout: 120000,
@@ -78,7 +78,7 @@ async function addUser(name, description){
             console.log(Date.now() - time + "ms")
         }
         else{
-            if(body.success == undefined){
+            if(body.success === undefined || body.message === undefined){
                 return console.log(body)
             }
             console.log("Success: " + body.success);
@@ -93,11 +93,14 @@ async function addUser(name, description){
 async function deleteUser(user){
     var time = Date.now();
     console.log("Sending...\n");
-    await request('https://kacper-api.localtunnel.me/api/v1/users/'+user, {
+    await request('https://kacper-api.localtunnel.me/api/v2/users/'+user, {
         json: true, 
         simple: false, 
         timeout: 120000,
-        method: "DELETE"
+        method: "DELETE",
+        headers:{
+            "ConfirmDelete": "true"
+        }
     }).then(body => {
         var success = body.success;
         if(success == "true"){
@@ -106,7 +109,7 @@ async function deleteUser(user){
             console.log(Date.now() - time + "ms")
         }
         else{
-            if(body.success == undefined){
+            if(body.success === undefined || body.message === undefined){
                 return console.log(body)
             }
             console.log("Success: " + body.success);
@@ -117,6 +120,37 @@ async function deleteUser(user){
         console.log(err);
     });
 };
+
+async function register() {
+    var time = Date.now();
+    console.log("Sending...\n");
+    await request("https://kacper-api.localtunnel.me/api/v2/register/", {
+      json: true,
+      simple: false,
+      timeout: 120000
+    }).then(body => {
+        var success = body.success;
+        if (success == "true") {
+          console.log("Success: " + body.success);
+          console.log("Message: " + body.message);
+          var content = body.content.users;
+          console.log("\nContent: \n" + JSON.stringify(content, null, 3));
+          if (content.length > 0)
+            console.log("Last user name: " + content[content.length - 1].name);
+          console.log(Date.now() - time + "ms");
+        } else {
+          if (body.success === undefined || body.message === undefined) {
+            return console.log(body);
+          }
+          console.log("Success: " + body.success);
+          console.log("Message: " + body.message);
+          console.log(Date.now() - time + "ms");
+        }
+    }).catch(err => {
+        console.log(err);
+    });
+}
+
 
 if (process.argv[2] == "getUser"){ //[0] is node, [1] is path, [2] is first argument 
     getUser(process.argv[3])
@@ -129,8 +163,9 @@ else if(process.argv[2] == "addUser") {
 }
 else if(process.argv[2] == "deleteUser") {
     deleteUser(process.argv[3])
-}
-else console.log("Use with argument: \ngetUser <ID>, \ngetAll, \naddUser <Name> <Description>, \ndeleteUser <ID>")
+} else if (process.argv[2] == "register") {
+    register();
+} else console.log("Use with argument: \ngetUser <ID>, \ngetAll, \naddUser <Name> <Description>, \ndeleteUser <ID>, \nregister");
 //getUser(2);
 //getAll()
 //addUser("Client", "Client script");
