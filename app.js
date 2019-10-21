@@ -38,9 +38,6 @@ var tunnel = localtunnel(tunnelPort, {subdomain: tunnelSubdomain}, function(err,
       console.log("Error! Subdomain in use!");
       process.exit();
     }
-    if(tunnelPort != app.get('port')){
-      console.log("Tunnel on different port! API:" + app.get('port') + " tunnel:" + tunnelPort);
-    }
   
     console.log("");
 });
@@ -67,9 +64,6 @@ tunnel.on('error', function(err){
       if(tunnel.url != tunnelUrlUWant){
         console.log("Error! Subdomain in use!");
         process.exit();
-      }
-      if(tunnelPort != app.get('port')){
-        console.log("Tunnel on different port! API:" + app.get('port') + " tunnel:" + tunnelPort);
       }
       
       console.log("");
@@ -98,7 +92,7 @@ app.get('/', (req, res) =>{
 });
 app.get('/:id', (req, res) => {
     const idOrName = req.params.id;
-    res.redirect(`/api/${versions.latestVersion}/users/` + idOrName);
+    res.redirect(`/api/${versions.latestVersion()}/users/` + idOrName);
 });
 
 //404
