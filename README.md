@@ -1,4 +1,9 @@
-# Node.js API supporting database (lowdb) with users
+# Node.js API supporting database (lowdb) with users + localtunnel
+<br/>
+
+## What is localtunnel
+[localtunnel page on npm](https://www.npmjs.com/package/localtunnel)
+
 <br/>
 
 ## You don't have public IP for API?
@@ -10,6 +15,7 @@ Try [second branch with localtunnel](https://github.com/Kacper1263/node.js-API-l
  
  - Clone repo
  - Go to main folder (with app.js)
+ - Edit tunnel config in app.js
  - Run <b>npm install</b> from command line
  
  <br/>
