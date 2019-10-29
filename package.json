@@ -13,9 +13,9 @@
     "@types/lowdb": "^1.0.9",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "localtunnel": "^2.0.0",
     "lowdb": "^1.0.0",
     "request": "^2.88.0",
-    "request-promise": "^4.2.4",
-    "localtunnel": "^1.9.2"
+    "request-promise": "^4.2.4"
   }
 }
