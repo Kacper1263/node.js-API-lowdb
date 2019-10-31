@@ -6,11 +6,6 @@
 
 <br/>
 
-## You don't have public IP for API?
-Try [second branch with localtunnel](https://github.com/Kacper1263/node.js-API-lowdb/tree/localtunnel) 
-
-<br/>
-
 ## How to install
  
  - Clone repo
